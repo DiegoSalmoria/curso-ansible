@@ -3,5 +3,5 @@
 
   tasks:
 
-   - name: Teste Ping!
+   - name: Teste Ping!!!
      ping:
