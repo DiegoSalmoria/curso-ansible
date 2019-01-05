@@ -1,0 +1,36 @@
+---
+- hosts: testing
+
+  tasks:
+
+    - name: Instala servidor Memcached
+      apt:
+        name: memcached
+        state: installed
+        update_cache: true
+      register: mencached_installed
+      notify:
+        - Start Memcached
+
+    - name: Define o arquivo de configurção do servidor Memcached
+      when: mencached_installed|success
+      copy:
+        src: /home/ansible/aula02/memcached/memcached.conf
+        dest: /etc/memcached.conf
+        owner: root
+        group: root
+        mode: 0644
+      notify:
+        - Restart Memcached
+
+  handlers:
+
+    - name: Start Memcached
+      service:
+        name: memcached
+        state: started
+
+    - name: Restart Memcached
+      service:
+        name: memcached
+        state: restarted

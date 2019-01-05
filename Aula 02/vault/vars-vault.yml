@@ -1,0 +1,16 @@
+---
+- hosts: testing
+  become: true
+
+  vars_files:
+    - my_secrets.yml
+
+  tasks:
+
+   - name: Define o arquivo de conexao PHP
+     template:
+       src: conexao.php.j2
+       dest: /tmp/conexao.php
+       owner: root
+       group: root
+       mode: 0644

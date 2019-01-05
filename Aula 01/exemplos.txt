@@ -1,0 +1,64 @@
+docker run -d --name=ansible-server -p 0.0.0.0:22:22 -h ansible-server.dexter.com.br --net dexterlan --ip 172.18.0.101 --restart=always ansible-server
+
+docker exec -ti ansible-server bash
+
+
+
+[testing]
+192.168.15.146
+165
+
+
+/home/ansible/.ssh/id_rsa
+
+openssl passwd -1
+Password:
+Verifying - Password:
+$1$WCjuHUOI$zTVghThW2md59AB.DE8ho0
+
+ansible all -s -m user -a 'name=suporte state=present shell=/bin/bash password=$1$CIB1VZqB$Zmc1ShSvQGCBOZfqEHffj0'
+
+ansible@AnsibleServer:~$ ansible testing -s -m user -a 'name=suporte state=absent remove=yes'
+
+
+ansible all -s -m apt -a 'pkg=htop state=installed update_cache=true'
+ansible testing -s -m apt -a 'pkg=htop state=absent'
+
+ansible all -s -m apt -a 'pkg=elinks state=installed update_cache=true'
+
+
+ansible all -s -m file -a 'path=/etc/nologin owner=root group=root mode=0644 state=touch'
+ansible all -s -m file -a 'path=/etc/nologin state=absent'
+
+
+ansible-playbook --syntax-check vars1.yml
+
+
+ansible-playbook -s --extra-vars "diretorios=/tmp/var/www/html/intranet"  vars4.yml
+
+ansible all -m ping
+
+
+apt-get remove vsftpd
+apt-get --purge remove vsftpd
+
+
+
+-----------------------------------------------------------------------------------
+
+# ansible-vault encrypt my_secrets.yml
+New Vault password:
+Confirm New Vault password:
+Encryption successful
+
+# ansible-playbook playbook.yml --ask-vault-pass
+Vault password:
+ 
+
+# ansible-vault edit my_secrets.yml
+Vault password:
+
+# ansible-vault edit my_secrets.yml
+
+
+ 

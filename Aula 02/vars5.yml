@@ -1,0 +1,19 @@
+---
+- hosts: testing
+  
+  tasks:
+  
+   - name: Instala apache no Debian/Ubuntu
+     apt:
+       name: apache2
+       state: installed
+       update_cache: true
+     register: apache2_installed
+     when: ansible_os_family == "Debian"
+     
+   - name: Instala apache no CentOS
+     yum:
+       name: httpd
+     when: ansible_os_family == "RedHat"
+       
+        

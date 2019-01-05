@@ -1,0 +1,38 @@
+---
+- hosts: security
+  #remote_user: root
+  become: true
+
+  tasks:
+
+    - name: Instala servidor de LOGs
+      apt:
+        name: rsyslog
+        state: installed
+        update_cache: true
+      register: rsyslog_installed
+      notify:
+        - Start Rsyslog
+
+    - name: Define o arquivo de configurção do servidor Rsyslog
+      when: rsyslog_installed|success
+      copy:
+        src: /home/ansible/aula02/rsyslog/rsyslog.conf
+        dest: /etc/rsyslog.conf
+        owner: root
+        group: root
+        mode: 0644
+      notify:
+        - Restart Rsyslog
+
+  handlers:
+
+    - name: Start Rsyslog
+      service:
+        name: rsyslog
+        state: started
+
+    - name: Restart Rsyslog
+      service:
+        name: rsyslog
+        state: restarted

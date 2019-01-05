@@ -1,0 +1,18 @@
+#https://docs.ansible.com/ansible/latest/modules/user_module.html#user-module
+---
+- hosts: security
+  become: true
+  tasks:
+  
+   - name: Adicionar usuario cloud para servidor de Testes
+     user:
+       name: cloud
+       shell: /bin/bash
+       password: $1$CIB1VZqB$Zmc1ShSvQGCBOZfqEHffj0
+       
+   - name: Adicionar usuário monitor para servidor de Testes
+     user:
+       name: monitor
+       shell: /bin/bash
+       password: $1$CIB1VZqB$Zmc1ShSvQGCBOZfqEHffj0
+        

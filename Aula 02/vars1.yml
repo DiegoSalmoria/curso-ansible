@@ -1,0 +1,16 @@
+#https://docs.ansible.com/ansible/latest/modules/user_module.html#user-module
+---
+- hosts: testing
+  
+  vars:
+    - usuario: linus
+  
+  tasks:
+  
+   - name: Adicionar usuario atraves de variavael 
+     user:
+       name: "{{ usuario }}"
+       state: present
+       shell: /bin/bash
+       password: $1$CIB1VZqB$Zmc1ShSvQGCBOZfqEHffj0
+        

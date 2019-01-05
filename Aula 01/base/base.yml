@@ -1,0 +1,49 @@
+#https://docs.ansible.com/ansible/latest/modules/user_module.html#user-module
+---
+- hosts: testing
+  become: true
+  tasks:
+  
+   - name: Adicionar usuario Suporte para servidor de Testes
+     user:
+       name: suporte
+       shell: /bin/bash
+       password: $1$CIB1VZqB$Zmc1ShSvQGCBOZfqEHffj0
+       
+   - name: Adicionar usuário HelpDesk para servidor de Testes
+     user:
+       name: helpdesk
+       shell: /bin/bash
+       password: $1$CIB1VZqB$Zmc1ShSvQGCBOZfqEHffj0
+    
+   - name: Instalar pacotes bases para sevidor de Teste
+     apt:
+       name: "{{item}}"
+       state: installed
+       update_cache: true
+     with_items:
+           - tzdata
+           - dnsutils
+           - bash-completion
+           - unzip
+           - bzip2
+           - htop
+           - vim
+           - mlocate
+           - nfs-common
+        
+   - name: Configurar arquivo /etc/hosts para para o servidor de Testes
+     copy:
+       src: /home/ansible/base/files/hosts 
+       dest: /etc/hosts
+       owner: root
+       group: root
+       mode: 0644
+       
+   - name: Configurar arquivo /etc/resolv.conf para para o servidor de Testes
+     copy:
+       src: /home/ansible/base/files/resolv.conf 
+       dest: /etc/resolv.conf
+       owner: root
+       group: root
+       mode: 0644     

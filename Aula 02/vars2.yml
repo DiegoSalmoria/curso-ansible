@@ -1,0 +1,15 @@
+---
+- hosts: testing
+  
+  vars_files:
+    - /home/ansible/playbooks/vars.yml
+  
+  tasks:
+  
+   - name: Instala pacote atraves de varivael.
+     apt:
+       name: "{{ pacotes }}"
+       state: present
+       update_cache: true
+       
+        

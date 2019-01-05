@@ -1,0 +1,55 @@
+---
+- hosts: security
+  #remote_user: root
+  become: true
+
+  tasks:
+
+    - name: Instala servidor DNS
+      apt:
+        name: bind9
+        state: installed
+        update_cache: true
+      register: bind9_installed
+      notify:
+        - Start Bind9
+
+    - name: Define o arquivo de configurção do servidor DNS
+      when: bind9_installed|success
+      copy:
+        src: "{{item}}"
+        dest: /etc/bind/
+        owner: root
+        group: root
+        mode: 0644
+      with_items:
+        - /home/ansible/aula02/dns/named.conf.local
+        - /home/ansible/aula02/dns/named.conf.options
+      notify:
+        - Reload Bind9
+
+    - name: Define o arquivo de registro de Zona
+      when: bind9_installed|success
+      copy:
+        src: "{{item}}"
+        dest: /var/cache/bind/
+        owner: root
+        group: root
+        mode: 0644
+      with_items:
+        - /home/ansible/aula02/dns/db.dexter.interna
+        - /home/ansible/aula02/dns/rev.dexter.interna
+      notify:
+        - Reload Bind9
+
+  handlers:
+
+    - name: Start Bind9
+      service:
+        name: bind9
+        state: started
+
+    - name: Reload Bind9
+      service:
+        name: bind9
+        state: reloaded

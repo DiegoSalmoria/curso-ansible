@@ -1,0 +1,42 @@
+---
+- hosts: security
+  become: true
+
+  tasks:
+
+    - name: Instala servidor FTP
+      apt:
+        name: vsftpd
+        state: installed
+        update_cache: true
+      register: vsftpd_installed
+      notify:
+        - Start vsFTPd
+
+    - name: Define o arquivo de configurção do servidor FTP
+      when: vsftpd_installed|success
+      copy:
+        src: /home/ansible/aula02/ftp/vsftpd.conf
+        dest: /etc/vsftpd.conf
+        owner: root
+        group: root
+        mode: 0644
+      notify:
+        - Restart vsFTPd
+
+  handlers:
+
+    - name: Start vsFTPd
+      service:
+        name: vsftpd
+        state: started
+
+    - name: Reload vsFTPd
+      service:
+        name: vsftpd
+        state: reloaded
+
+    - name: Restart vsFTPd
+      service:
+        name: vsftpd
+        state: restarted
