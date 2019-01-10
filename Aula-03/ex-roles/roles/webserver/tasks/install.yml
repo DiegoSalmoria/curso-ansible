@@ -1,0 +1,10 @@
+---
+- name: Instala pacotes para suporte a PHP no Apache em distribuição Debin
+  apt:
+    name: "{{ php_packages_debian }}"
+    state: installed
+    update_cache: true
+  when: ansible_os_family == "Debian"
+  register: php_packages_debian_installed
+  notify:
+    - Start Apache

@@ -1,0 +1,11 @@
+---
+- name: Define o arquivo de configurção para testar o suporte PHP em Distribuição Debian
+  when: (ansible_os_family == "Debian" and php_packages_debian_installed|success)
+  copy:
+    src: /home/ansible/aula02/webserver/index.php
+    dest: /var/www/html/index.php
+    owner: www-data
+    group: www-data
+    mode: 0644
+  notify:
+    - Reload Apache

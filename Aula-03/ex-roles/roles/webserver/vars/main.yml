@@ -1,0 +1,17 @@
+---
+php_packages_debian:
+  - apache2
+  - libapache2-mod-php
+  - php
+  - php-curl
+  - php-gd
+  - php-intl
+  - php-xmlrpc
+  - php-pgsql
+  - php-pear
+  - php-mcrypt
+  - php-ldap
+  - php-net-ldap2
+  - php-imagick
+  - php-fpdf
+  - php-mysql
