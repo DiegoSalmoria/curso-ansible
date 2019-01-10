@@ -1,2 +1,12 @@
 ---
 # handlers file for memcashed
+
+- name: Start Memcached
+  service:
+    name: memcached
+    state: started
+
+- name: Restart Memcached
+  service:
+    name: memcached
+    state: restarted

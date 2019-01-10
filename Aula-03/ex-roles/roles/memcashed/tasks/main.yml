@@ -1,2 +1,22 @@
 ---
 # tasks file for memcashed
+
+- name: Instala servidor Memcached
+  apt:
+    name: memcached
+    state: installed
+    update_cache: true
+  register: mencached_installed
+  notify:
+    - Start Memcached
+
+- name: Define o arquivo de configurção do servidor Memcached
+  when: mencached_installed|success
+  copy:
+    src: files/memcached.conf
+    dest: /etc/memcached.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - Restart Memcached
