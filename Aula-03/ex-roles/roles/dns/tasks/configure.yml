@@ -11,8 +11,8 @@
   with_items:
     - files/named.conf.local
     - files/named.conf.options
-    notify:
-        - Reload Bind9
+  notify:
+    - Reload Bind9
 
 - name: Define o arquivo de registro de Zona
   when: bind9_installed|success
@@ -25,5 +25,5 @@
   with_items:
     - files/db.dexter.interna
     - files/rev.dexter.interna
-    notify:
-      - Reload Bind9
+  notify:
+    - Reload Bind9
