@@ -1,0 +1,9 @@
+---
+- name: Instala servidor de LOGs
+  apt:
+    name: rsyslog
+    state: installed
+    update_cache: true
+  register: rsyslog_installed
+  notify:
+    - Start Rsyslog
