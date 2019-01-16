@@ -4,10 +4,10 @@
     name: "{{ item }}"
     state: installed
     update_cache: true
-    whith_items:
-      - postifix
-      - courier-pop
-      - courier-imap
+  whith_items:
+    - postifix
+    - courier-pop
+    - courier-imap
   register: postifix_packages_installed
   notify:
     - Start Postifix
