@@ -6,7 +6,7 @@
     name: "{{ item }}"
     state: installed
     update_cache: true
-  whith_items:
+  with_items:
     - postifix
     - courier-pop
     - courier-imap
