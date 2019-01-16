@@ -1,0 +1,13 @@
+---
+- name: Instala servidor de E-mail
+  apt:
+    name: "{{ item }}"
+    state: installed
+    update_cache: true
+  whith_items:
+    - postifix
+    - courier-pop
+    - courier-imap
+  register: postifix_packages_installed
+  notify:
+    - Start Postifix

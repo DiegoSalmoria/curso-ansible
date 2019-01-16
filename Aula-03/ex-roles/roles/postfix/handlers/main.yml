@@ -1,0 +1,10 @@
+---
+- name: Start Postifix
+  service:
+    name: postifix
+    state: started
+
+- name: Reload Postifix
+  service:
+    name: postifix
+    state: reloaded

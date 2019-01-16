@@ -1,0 +1,11 @@
+---
+- name: Define o arquivo de configurção do servidor Postifix
+  when: postifix_packages_installed|success
+  copy:
+    src: main.cf
+    dest: /etc/postifix/main.cf
+    owner: root
+    group: root
+    mode: 0644
+  notify:
+    - Reload Postifix
