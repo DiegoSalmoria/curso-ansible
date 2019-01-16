@@ -1,5 +1,5 @@
 ---
-- name: Instala servidor de E-mail
+- name: Instala servidor de Email
   apt:
     name: "{{ item }}"
     state: installed
