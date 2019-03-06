@@ -10,14 +10,19 @@
   #     state: installed
   #     update_cache: true
 
-  # - name: Synchronization of src on the control machine to dest on the remote hosts
-  #   synchronize:
-  #     src: /nas/lib
-  #     dest: /var/weblogic/lib
-  #     set_remote_user: false
+   - name: Synchronization of src on the control machine to dest on the remote hosts
+     synchronize:
+       src: /nas/lib
+       dest: /var/weblogic/lib
+
   #   delegate_to: testing
-   - name: Copiando as "LIBs" do NAS.
-     copy:
-      src: /nas/lib
-      dest: /var/weblogic/lib
-      remote_src: yes
+  # - name: Copiando as "LIBs" do NAS.
+  #   copy:
+  #    src: /nas/lib
+  #    dest: /var/weblogic/lib
+  #    remote_src: yes
+
+
+# rsync -avzh  /nas/lib/ /var/weblogic/lib/
+
+# rsync -avzh --delete /nas/lib/ /var/weblogic/lib/
