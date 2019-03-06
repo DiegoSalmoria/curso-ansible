@@ -14,4 +14,4 @@
      synchronize:
        src: /nas/lib
        dest: /var/weblogic/lib
-     delegate_to: "{{ inventory_hostname }}"
+     delegate_to: host
