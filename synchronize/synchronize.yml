@@ -12,7 +12,7 @@
 
    - name: Synchronization of src on the control machine to dest on the remote hosts
      synchronize:
-       src: /nas/lib
+       src: ansible@/nas/lib
        dest: /var/weblogic/lib
-       set_remote_user: ansbile
+       set_remote_user: false
      delegate_to: testing
