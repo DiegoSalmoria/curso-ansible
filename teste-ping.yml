@@ -3,5 +3,7 @@
 
   tasks:
 
+   # teste ping       
    - name: Teste Ping!!!
      ping:
+
